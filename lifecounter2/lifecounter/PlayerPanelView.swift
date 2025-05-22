@@ -20,7 +20,8 @@ class PlayerPanelView: UIView {
     }
   }
 
-  var onLifeChanged: ((Int) -> Void)?
+  var onLifeChanged: ((Int, Int) -> Void)?
+  var onNameTapped: (() -> Void)?
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -32,22 +33,35 @@ class PlayerPanelView: UIView {
     customAmountStepper.maximumValue = 1
     customAmountStepper.stepValue = 1
     customAmountStepper.value = 0
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(nameLabelTapped))
+    nameLabel.isUserInteractionEnabled = true
+    nameLabel.addGestureRecognizer(tapGesture)
+  }
+  
+  @objc private func nameLabelTapped() {
+    onNameTapped?()
   }
 
   @IBAction private func didTapPlus(_ sender: UIButton) {
-    life += 1
-    onLifeChanged?(life)
+    let customAmount = Int(customAmountTextField.text ?? "1") ?? 1
+    let oldLife = life
+    life += customAmount
+    onLifeChanged?(life, oldLife)
   }
 
   @IBAction private func didTapMinus(_ sender: UIButton) {
     if life > 0 {
-      life -= 1
-      onLifeChanged?(life)
+      let customAmount = Int(customAmountTextField.text ?? "1") ?? 1
+      let oldLife = life
+      life = max(0, life - customAmount)
+      onLifeChanged?(life, oldLife)
     }
   }
 
   @IBAction private func customAmountStepperChanged(_ sender: UIStepper) {
     let customAmount = Int(customAmountTextField.text ?? "1") ?? 1
+    let oldLife = life
     
     if sender.value > 0 {
       life += customAmount
@@ -56,11 +70,14 @@ class PlayerPanelView: UIView {
     }
     
     sender.value = 0
-    onLifeChanged?(life)
+    onLifeChanged?(life, oldLife)
   }
 
   @IBAction private func customAmountFieldEditingDidEnd(_ sender: UITextField) {
-    let value = Int(sender.text ?? "") ?? 1
-    sender.text = "\(value)"
+    if let text = sender.text, let value = Int(text), value > 0 {
+      sender.text = "\(value)"
+    } else {
+      sender.text = "1"
+    }
   }
 }

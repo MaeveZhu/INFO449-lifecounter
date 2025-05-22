@@ -45,11 +45,18 @@
                                         <rect key="frame" x="401" y="5" width="192.5" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="View History"/>
+                                        <connections>
+                                            <action selector="viewHistoryTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xyz-abc-123"/>
+                                            <segue destination="6SD-Vk-5gs" kind="show" identifier="ShowHistory" id="cyd-x4-4HC"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hL8-wv-f0v">
                                         <rect key="frame" x="601.5" y="5" width="192.5" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Reset"/>
+                                        <connections>
+                                            <action selector="resetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p8A-X4-Nrn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -81,11 +88,55 @@
                         <outlet property="addPlayerButton" destination="wvN-PN-ihu" id="qgz-TX-Ugf"/>
                         <outlet property="deletePlayerButton" destination="ALz-ec-ijf" id="Wnq-i5-Od1"/>
                         <outlet property="messageLabel" destination="JZp-SH-aQu" id="c2e-CO-Lnf"/>
+                        <outlet property="resetButton" destination="hL8-wv-f0v" id="Z0N-iX-Kbs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="119.42446043165468" y="3.4710743801652892"/>
+            <point key="canvasLocation" x="179" y="-66"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="Dkc-Bu-zvo">
+            <objects>
+                <viewController title="History" id="6SD-Vk-5gs" customClass="HistoryViewController" customModule="lifecounter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ebE-8B-hJg">
+                        <rect key="frame" x="0.0" y="0.0" width="580" height="640"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lHT-Ph-vOT">
+                                <rect key="frame" x="20" y="20" width="580" height="557"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpY-r1-OE8">
+                                <rect key="frame" x="20" y="585" width="540" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="6SD-Vk-5gs" eventType="touchUpInside" id="4kI-Mr-LUt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="F9k-hK-LsW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tpY-r1-OE8" firstAttribute="leading" secondItem="F9k-hK-LsW" secondAttribute="leading" constant="20" id="04M-eV-Dta"/>
+                            <constraint firstItem="lHT-Ph-vOT" firstAttribute="leading" secondItem="F9k-hK-LsW" secondAttribute="leading" constant="20" id="0VS-hD-PKg"/>
+                            <constraint firstItem="tpY-r1-OE8" firstAttribute="top" secondItem="lHT-Ph-vOT" secondAttribute="bottom" constant="8" symbolic="YES" id="7V6-p7-EPb"/>
+                            <constraint firstItem="F9k-hK-LsW" firstAttribute="bottom" secondItem="tpY-r1-OE8" secondAttribute="bottom" constant="20" id="ECA-EJ-uQ2"/>
+                            <constraint firstItem="F9k-hK-LsW" firstAttribute="trailing" secondItem="tpY-r1-OE8" secondAttribute="trailing" constant="20" id="Z1n-aD-zdP"/>
+                            <constraint firstItem="lHT-Ph-vOT" firstAttribute="top" secondItem="F9k-hK-LsW" secondAttribute="top" constant="20" id="c46-8U-IJj"/>
+                            <constraint firstItem="lHT-Ph-vOT" firstAttribute="trailing" secondItem="F9k-hK-LsW" secondAttribute="trailing" constant="20" id="f5k-U9-ekq"/>
+                            <constraint firstItem="tpY-r1-OE8" firstAttribute="top" secondItem="lHT-Ph-vOT" secondAttribute="bottom" constant="8" symbolic="YES" id="uib-8v-4Zk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="S1N-hn-eCX"/>
+                    <connections>
+                        <outlet property="tableView" destination="lHT-Ph-vOT" id="y69-Qo-8ly"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TbQ-Rl-svX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="973.38129496402883" y="-73.388429752066116"/>
         </scene>
     </scenes>
     <resources>
